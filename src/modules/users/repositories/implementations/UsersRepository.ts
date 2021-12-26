@@ -24,6 +24,8 @@ class UsersRepository implements IUsersRepository {
     const newUser = Object.assign(user, {
       name,
       email,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
 
     this.users.push(newUser);
@@ -47,6 +49,7 @@ class UsersRepository implements IUsersRepository {
     const user = this.users.find((user) => user === receivedUser);
 
     user.admin = true;
+    user.updated_at = new Date();
 
     return user;
   }
