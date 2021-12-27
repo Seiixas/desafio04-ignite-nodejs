@@ -10,6 +10,11 @@ class TurnUserAdminUseCase {
 
   execute({ user_id }: IRequest): User {
     const userToBeAdmin = this.usersRepository.findById(user_id);
+
+    if (userToBeAdmin.admin) {
+      throw new Error("User already is admin");
+    }
+
     const user = this.usersRepository.turnAdmin(userToBeAdmin);
 
     return user;
